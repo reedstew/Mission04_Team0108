@@ -46,18 +46,19 @@ public class Driver
                 board[i, j] = '#';
             }
         }
-        // Print
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                Console.Write(board[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
 
         // Ask each player in turn for their choice and update the game board array
+        Console.WriteLine("Player One: Choose a row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
+        string pOneRow = Console.ReadLine();
+
         
+        Console.WriteLine("Player One: Choose a column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
+        string pOneColumn  = Console.ReadLine();
+
+    }
+
+    public static void Validate(string choice)
+    {
 
     }
 }
