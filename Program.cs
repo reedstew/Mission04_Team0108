@@ -17,8 +17,9 @@ using System.Threading.Tasks;
 
 public class Driver
     {
-        public static void Main()
-        {
+    public static void Main()
+    {
+        bool GameWon = false;
 
         // Welcome the user to the game
         Console.Write("Welcome to the game of Tic-Tac-Toe");
@@ -46,20 +47,76 @@ public class Driver
                 board[i, j] = '#';
             }
         }
+        // Begin the game:
 
-        // Ask each player in turn for their choice and update the game board array
-        Console.WriteLine("Player One: Choose a row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
-        string pOneRow = Console.ReadLine();
+        do
+        {
 
-        
-        Console.WriteLine("Player One: Choose a column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
-        string pOneColumn  = Console.ReadLine();
 
+            // Ask each player in turn for their choice and update the game board array
+            Console.WriteLine("Player One: Choose a row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
+            string pOneRow = Console.ReadLine();
+            ValidateRow(pOneRow);
+
+
+            Console.WriteLine("Player One: Choose a column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
+            string pOneColumn = Console.ReadLine();
+            ValidateColumn(pOneColumn);
+
+        } while (!GameWon);
+    }
+    public static void ValidateRow(string choice)
+    {
+        bool valid = false;
+        do
+        {
+            choice = choice.ToUpper();
+            if ((choice == "TOP" || choice == "MIDDLE" || choice == "BOTTOM"))
+            {
+                valid = true;
+            }
+            else
+            {
+                Console.WriteLine("Please choose a valid row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
+                choice = Console.ReadLine();
+            }
+        } while (valid);
     }
 
-    public static void Validate(string choice)
+    public static void ValidateColumn(string choice)
     {
+        bool valid = false;
+        do
+        {
+            choice = choice.ToUpper();
+            if ((choice == "LEFT" || choice == "CENTER" || choice == "RIGHT"))
+            {
+                valid = true;
+            }
+            else
+            {
+                Console.WriteLine("Please choose a valid column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
+                choice = Console.ReadLine();
+            }
+        } while (valid);
+    }
 
+    public static bool CheckForWinner(char[,] board)
+    {
+        // Check rows, columns, and diagonals for a winner
+        for (int i = 0; i < 3; i++)
+        {
+            if (board[i, 0] == board[i, 1] && board[i, 1] == board[i, 2] && board[i, 0] != ' ')
+                return true;
+            if (board[0, i] == board[1, i] && board[1, i] == board[2, i] && board[0, i] != ' ')
+                return true;
+        }
+        if (board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2] && board[0, 0] != ' ')
+            return true;
+        if (board[0, 2] == board[1, 1] && board[1, 1] == board[2, 0] && board[0, 2] != ' ')
+            return true;
+
+        return false;
     }
 }
     
