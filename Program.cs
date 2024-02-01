@@ -54,14 +54,54 @@ public class Driver
 
 
             // Ask each player in turn for their choice and update the game board array
+
+            // First players turn
             Console.WriteLine("Player One: Choose a row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
             string pOneRow = Console.ReadLine();
             ValidateRow(pOneRow);
-
+            pOneRow = pOneRow.ToUpper();
 
             Console.WriteLine("Player One: Choose a column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
             string pOneColumn = Console.ReadLine();
             ValidateColumn(pOneColumn);
+            pOneColumn = pOneColumn.ToUpper();
+
+            if (pOneRow.Equals("TOP"))
+            {
+                playerOne[0, 1] = "X";
+            }
+            else if (pOneRow.Equals("MIDDLE"))
+            {
+
+            }
+            else
+            {
+
+            }
+
+            // Second players turn
+            Console.WriteLine("Player Two: Choose a row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
+            string pTwoRow = Console.ReadLine();
+            ValidateRow(pTwoRow);
+            pTwoRow = pTwoRow.ToUpper();
+
+            Console.WriteLine("Player Two: Choose a column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
+            string pTwoColumn = Console.ReadLine();
+            ValidateColumn(pTwoColumn);
+            pTwoColumn = pTwoColumn.ToUpper();
+
+            if (pTwoRow.Equals("TOP"))
+            {
+
+            }
+            else if (pTwoRow.Equals("MIDDLE"))
+            {
+
+            }
+            else
+            {
+
+            }
 
         } while (!GameWon);
     }
