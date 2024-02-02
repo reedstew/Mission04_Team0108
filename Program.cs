@@ -23,7 +23,7 @@ public class Driver
         int gameTracker = 0;
         bool GameWon = false;
         int turnTracker = 0;
-        // Welcome the user to the game
+        // Welcome the user to the game (1/5)
         Console.Write("Welcome to the game of Tic-Tac-Toe");
         Thread.Sleep(400);
         Console.Write(".");
@@ -33,14 +33,14 @@ public class Driver
         Console.Write('.');
         Console.WriteLine("");
         Support s = new Support();
-        //Create a game board array to store the players’ choices
+        //Create a game board array to store the players’ choices (2/5)
 
         //Define 3x3
         char[,] board = new char[3, 3];
-        // Player arrays
+        // Game over variable
         bool WinnerFlag = false;
 
-        // Populate
+        // initially build the board
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -55,7 +55,7 @@ public class Driver
             string row = "";
             string column = "";
 
-            // Ask each player in turn for their choice and update the game board array
+            // Ask each player in turn for their choice and update variables to put into array (2.5/5)
 
             // First players turn
             if (turnTracker == 0)
@@ -81,7 +81,7 @@ public class Driver
             }
 
             turnTracker++;
-            
+            // Update the game board array (3/5) and print board by calling method from supporting class (4/5)
             if (turnTracker == 2)
             {
                 turnTracker = 0;
@@ -92,6 +92,8 @@ public class Driver
                 board = s.UpdateBoard(board, row, column, turnTracker);
             }
 
+            // Check for a winner by calling the method in the supporting class, and notify the players when a win has occurred and which player won the game (5/5)
+            
             GameWon = s.Winner(board, WinnerFlag);
             gameTracker++;
             if (gameTracker == 9 && !GameWon)
