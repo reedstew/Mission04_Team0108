@@ -20,6 +20,7 @@ public class Driver
     {
     public static void Main()
     {
+        int gameTracker = 0;
         bool GameWon = false;
         int turnTracker = 0;
         // Welcome the user to the game
@@ -76,11 +77,11 @@ public class Driver
                 column = Console.ReadLine();
                 column = ValidateColumn(column);
 
+
             }
 
-
-
             turnTracker++;
+            
             if (turnTracker == 2)
             {
                 turnTracker = 0;
@@ -92,6 +93,12 @@ public class Driver
             }
 
             GameWon = s.Winner(board, WinnerFlag);
+            gameTracker++;
+            if (gameTracker == 9 && !GameWon)
+            {
+                GameWon = true;
+                Console.WriteLine("Womp. Womp. You ended in a tie...");
+            }
         } while (!GameWon);
     }
     public static string ValidateRow(string choice)
@@ -134,25 +141,6 @@ public class Driver
             }
         } while (!valid);
         return validColumn;
-    }
-
-
-    public static bool CheckForWinner(char[,] board)
-    {
-        // Check rows, columns, and diagonals for a winner
-        for (int i = 0; i < 3; i++)
-        {
-            if (board[i, 0] == board[i, 1] && board[i, 1] == board[i, 2] && board[i, 0] != ' ')
-                return true;
-            if (board[0, i] == board[1, i] && board[1, i] == board[2, i] && board[0, i] != ' ')
-                return true;
-        }
-        if (board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2] && board[0, 0] != ' ')
-            return true;
-        if (board[0, 2] == board[1, 1] && board[1, 1] == board[2, 0] && board[0, 2] != ' ')
-            return true;
-
-        return false;
     }
 }
     

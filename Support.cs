@@ -20,8 +20,8 @@ namespace Mission04_Team0108
             • Contain a method that receives the game board array as input and returns if there is a
                 winner and who it was*/
 
-
-
+        Driver d = new Driver();
+        
         bool winnerFlag = false;
         bool[] winningSituations = new bool[8];
         string winningTeam = "";
@@ -30,52 +30,85 @@ namespace Mission04_Team0108
         {
             int rowIndex = 0;
             int columnIndex = 0;
+            bool booleantrig = false;
             row = row.ToUpper();
             column = column.ToUpper();
             //These if statements are changing the top, middle, bottom, left, middle, right into the numbers in the array
-            if (row == "TOP")
+            do
             {
-                rowIndex = 0;
-            }
-            else if (row == "MIDDLE")
-            {
-                rowIndex = 1;
-            }
-            else if (row == "BOTTOM")
-            {
-                rowIndex = 2;
-            }
-            else
-            {
-                Console.WriteLine("Input for row is not valid");
-            }
+                
+                if (row == "TOP")
+                {
+                    rowIndex = 0;
+                }
+                else if (row == "MIDDLE")
+                {
+                    rowIndex = 1;
+                }
+                else if (row == "BOTTOM")
+                {
+                    rowIndex = 2;
+                }
+                else
+                {
+                    Console.WriteLine("Input for row is not valid");
+                }
 
-            if (column == "LEFT")
-            {
-                columnIndex = 0;
-            }
-            else if (column == "CENTER")
-            {
-                columnIndex = 1;
-            }
-            else if (column == "RIGHT")
-            {
-                columnIndex = 2;
-            }
-            else
-            {
-                Console.WriteLine("Input for column is not valid");
-            }
-            //This is deciding whether it gets changed with an O or an X using the turnTracker variable
-            if (turnTracker == 1)
-            {
-                board[rowIndex, columnIndex] = 'X';
-            }
-            else if (turnTracker == 0)
-            {
-                board[rowIndex, columnIndex] = 'O';
-            }
+                if (column == "LEFT")
+                {
+                    columnIndex = 0;
+                }
+                else if (column == "CENTER")
+                {
+                    columnIndex = 1;
+                }
+                else if (column == "RIGHT")
+                {
+                    columnIndex = 2;
+                }
+                else
+                {
+                    Console.WriteLine("Input for column is not valid");
+                }
+                //This is deciding whether it gets changed with an O or an X using the turnTracker variable
+                if (turnTracker == 1)
+                {
+                    if (board[rowIndex, columnIndex] != 'X' && board[rowIndex, columnIndex] != 'O')
+                    {
+                        board[rowIndex, columnIndex] = 'X';
+                        booleantrig = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You have tried to play on a space that has already been taken please choose again.");
+                        Console.WriteLine("Player One: Choose a row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
+                        row = Console.ReadLine();
+                        row = ValidateRow(row);
+                        Console.WriteLine("Player One: Choose a column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
+                        column = Console.ReadLine();
+                        column = ValidateColumn(column);
+                    }
 
+                }
+                else if (turnTracker == 0)
+                {
+                    if (board[rowIndex, columnIndex] != 'X' && board[rowIndex, columnIndex] != 'O')
+                    {
+                        board[rowIndex, columnIndex] = 'O';
+                        booleantrig = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You have tried to play on a space that has already been taken please choose again.");
+                        Console.WriteLine("Player Two: Choose a row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
+                        row = Console.ReadLine();
+                        row = ValidateRow(row);
+                        Console.WriteLine("Player Two: Choose a column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
+                        column = Console.ReadLine();
+                        column = ValidateColumn(column);
+                    }
+                }
+            } while (!booleantrig);
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -178,6 +211,48 @@ namespace Mission04_Team0108
 
             return winnerFlag;
 
+        }
+
+        private static string ValidateColumn(string choice)
+        {
+            string validColumn = "";
+            bool valid = false;
+            do
+            {
+                choice = choice.ToUpper();
+                if ((choice == "LEFT" || choice == "CENTER" || choice == "RIGHT"))
+                {
+                    validColumn = choice;
+                    valid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Please choose a valid column. Type 'LEFT', 'CENTER', or 'RIGHT'.");
+                    choice = Console.ReadLine();
+                }
+            } while (!valid);
+            return validColumn;
+        }
+
+        private static string ValidateRow(string choice)
+        {
+            string validRow = "";
+            bool valid = false;
+            do
+            {
+                choice = choice.ToUpper();
+                if ((choice == "TOP" || choice == "MIDDLE" || choice == "BOTTOM"))
+                {
+                    validRow = choice;
+                    valid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Please choose a valid row. Type 'TOP', 'MIDDLE', or 'BOTTOM'.");
+                    choice = Console.ReadLine();
+                }
+            } while (!valid);
+            return validRow;
         }
 
 
